@@ -96,46 +96,149 @@ python nnunet_train.py --config 3d_fullres --epochs 250 --fold 0
 
 <!-- toc:start -->
 <!-- 目錄由 scripts/generate_toc.py 自動產生，請勿手動編輯 -->
-- [⚡ 快速訓練與時間策略](#⚡-快速訓練與時間策略)
-  - [1. 目標分層](#1-目標分層)
-  - [2. 訓練配置選擇指南](#2-訓練配置選擇指南)
-  - [3. 建議漸進實作流程](#3-建議漸進實作流程)
-  - [4. 時間預估（以 Apple Silicon / 中階 GPU 為例）](#4-時間預估（以-apple-silicon-中階-gpu-為例）)
-  - [5. Early Stopping 使用提示](#5-early-stopping-使用提示)
-  - [6. 指令範例](#6-指令範例)
-  - [7. 何時結束訓練？](#7-何時結束訓練？)
-  - [8. 常見加速決策](#8-常見加速決策)
-  - [9. 推薦快速開始組合](#9-推薦快速開始組合)
-  - [10. 產出品質 vs 時間的心法](#10-產出品質-vs-時間的心法)
-- [🚀 快速開始](#quick-start)
-  - [前置需求](#前置需求)
-  - [一鍵安裝環境](#一鍵安裝環境)
-  - [✅ 分步腳本（適合教學/分享）](#✅-分步腳本（適合教學分享）)
-- [📁 專案結構](#project-structure)
-- [🔧 腳本說明](#scripts)
-  - [1. `setup_environment.ps1` / `setup_environment.sh`（環境安裝腳本）](#1-setup_environmentps1-setup_environmentsh（環境安裝腳本）)
-  - [2. `rename_dataset.py`（資料集下載與標準化）](#2-rename_datasetpy（資料集下載與標準化）)
-  - [3. `nnunet_train.py`（訓練腳本）](#3-nnunet_trainpy（訓練腳本）)
-  - [4. `nnunet_infer.py`（推論腳本）](#4-nnunet_inferpy（推論腳本）)
-  - [5. `nnunet_evaluate.py`（評估腳本）](#5-nnunet_evaluatepy（評估腳本）)
-- [🔄 使用流程](#usage)
-  - [完整訓練流程（從零開始）](#完整訓練流程（從零開始）)
-- [📚 原理解析](#concepts)
-  - [nnU-Net 簡介](#nnu-net-簡介)
-  - [資料格式要求](#資料格式要求)
-  - [資料預處理流程](#資料預處理流程)
-  - [訓練策略](#訓練策略)
-- [❓ 常見問題](#faq)
-  - [Q1：執行 `setup_environment.ps1` 時顯示「無法載入，因為這個系統上已停用指令碼執行」？](#q1：執行-setup_environmentps1-時顯示「無法載入，因為這個系統上已停用指令碼執行」？)
-  - [Q2：訓練過程中出現「CUDA out of memory」或記憶體不足錯誤？](#q2：訓練過程中出現「cuda-out-of-memory」或記憶體不足錯誤？)
-  - [Q3：如何查看訓練進度？](#q3：如何查看訓練進度？)
-  - [Q4：如何恢復中斷的訓練？](#q4：如何恢復中斷的訓練？)
-  - [Q5：資料集太大，預處理很慢怎麼辦？](#q5：資料集太大，預處理很慢怎麼辦？)
-  - [Q6：macOS 上執行腳本時顯示「command not found: python」？](#q6：macos-上執行腳本時顯示「command-not-found-python」？)
-  - [Q7：如何分享此專案給同學？](#q7：如何分享此專案給同學？)
-- [📖 參考資料](#📖-參考資料)
-- [📧 聯絡資訊](#📧-聯絡資訊)
+- [CardiacSeg：心臟影像分割專案](#cardiacseg心臟影像分割專案)
+  - [⚡ 快速訓練與時間策略](#-快速訓練與時間策略)
+    - [1. 目標分層](#1-目標分層)
+    - [2. 訓練配置選擇指南](#2-訓練配置選擇指南)
+    - [3. 建議漸進實作流程](#3-建議漸進實作流程)
+    - [4. 時間預估（以 Apple Silicon / 中階 GPU 為例）](#4-時間預估以-apple-silicon--中階-gpu-為例)
+    - [5. Early Stopping 使用提示](#5-early-stopping-使用提示)
+    - [6. 指令範例](#6-指令範例)
+    - [7. 何時結束訓練？](#7-何時結束訓練)
+    - [8. 常見加速決策](#8-常見加速決策)
+    - [9. 推薦快速開始組合](#9-推薦快速開始組合)
+    - [10. 產出品質 vs 時間的心法](#10-產出品質-vs-時間的心法)
+  - [📋 目錄](#-目錄)
+  - [📝 HW5 專案報告 (Project Report)](#-hw5-專案報告-project-report)
+    - [0. 團隊成員 (Team Member)](#0-團隊成員-team-member)
+    - [1. 摘要 (Abstract)](#1-摘要-abstract)
+    - [2. 方法論 (Methodology)](#2-方法論-methodology)
+      - [模型架構](#模型架構)
+      - [Soft Voting Ensemble (機率加權集成)](#soft-voting-ensemble-機率加權集成)
+      - [推論增強與後處理](#推論增強與後處理)
+    - [3. 實驗過程與演進 (Evolution of Approaches)](#3-實驗過程與演進-evolution-of-approaches)
+    - [4. 未來展望 (Future Work)](#4-未來展望-future-work)
+  - [🚀 快速開始 {#quick-start}](#-快速開始-quick-start)
+    - [前置需求](#前置需求)
+    - [一鍵安裝環境](#一鍵安裝環境)
+      - [Windows 用戶](#windows-用戶)
+      - [macOS / Linux 用戶](#macos--linux-用戶)
+        - [方式 1：使用 bash 腳本](#方式-1使用-bash-腳本)
+        - [方式 2：使用 PowerShell 腳本（需先安裝 PowerShell）](#方式-2使用-powershell-腳本需先安裝-powershell)
+    - [✅ 分步腳本（適合教學/分享）](#-分步腳本適合教學分享)
+      - [macOS / Linux](#macos--linux)
+      - [Windows（PowerShell）](#windowspowershell)
+  - [📁 專案結構 {#project-structure}](#-專案結構-project-structure)
+  - [🔧 腳本說明 {#scripts}](#-腳本說明-scripts)
+    - [1. `setup_environment.ps1` / `setup_environment.sh`（環境安裝腳本）](#1-setup_environmentps1--setup_environmentsh環境安裝腳本)
+    - [2. `rename_dataset.py`（資料集下載與標準化）](#2-rename_datasetpy資料集下載與標準化)
+    - [3. `nnunet_train.py`（訓練腳本）](#3-nnunet_trainpy訓練腳本)
+    - [4. `nnunet_infer.py`（推論腳本）](#4-nnunet_inferpy推論腳本)
+    - [5. `nnunet_evaluate.py`（評估腳本）](#5-nnunet_evaluatepy評估腳本)
+  - [🔄 使用流程 {#usage}](#-使用流程-usage)
+    - [完整訓練流程（從零開始）](#完整訓練流程從零開始)
+  - [📚 原理解析 {#concepts}](#-原理解析-concepts)
+    - [nnU-Net 簡介](#nnu-net-簡介)
+    - [資料格式要求](#資料格式要求)
+    - [資料預處理流程](#資料預處理流程)
+    - [訓練策略](#訓練策略)
+  - [❓ 常見問題 {#faq}](#-常見問題-faq)
+    - [Q1：執行 `setup_environment.ps1` 時顯示「無法載入，因為這個系統上已停用指令碼執行」？](#q1執行-setup_environmentps1-時顯示無法載入因為這個系統上已停用指令碼執行)
+    - [Q2：訓練過程中出現「CUDA out of memory」或記憶體不足錯誤？](#q2訓練過程中出現cuda-out-of-memory或記憶體不足錯誤)
+    - [Q3：如何查看訓練進度？](#q3如何查看訓練進度)
+    - [Q4：如何恢復中斷的訓練？](#q4如何恢復中斷的訓練)
+    - [Q5：資料集太大，預處理很慢怎麼辦？](#q5資料集太大預處理很慢怎麼辦)
+    - [Q6：macOS 上執行腳本時顯示「command not found: python」？](#q6macos-上執行腳本時顯示command-not-found-python)
+    - [Q7：如何分享此專案給同學？](#q7如何分享此專案給同學)
+  - [📖 參考資料](#-參考資料)
+  - [📧 聯絡資訊](#-聯絡資訊)
 <!-- toc:end -->
+
+---
+
+## 📝 HW5 專案報告 (Project Report)
+
+### 0. 團隊成員 (Team Member)
+*   [學校] [學號] [姓名]
+*   (請自行填寫)
+
+### 1. 摘要 (Abstract)
+
+本研究旨在解決心臟 MRI 影像的自動化分割問題，目標是精確分割左心室 (LV)、右心室 (RV) 及心肌 (Myocardium)。我們採用了基於 nnU-Net 框架的集成學習策略。初期實驗顯示單一模型難以同時兼顧所有結構的分割精度，特別是右心室的複雜形狀。因此，我們提出了一種結合 **2D nnU-Net** 與 **3D Low-resolution nnU-Net** 的集成方法。
+
+本報告重點描述最終優化版本 (V8) 的策略：採用 **Soft Voting (機率加權集成)** 取代傳統的硬標籤投票，並結合 **Test Time Augmentation (TTA)** 與針對性的後處理 (LCC, Fill Holes, Morphological Closing)。實驗結果顯示，此策略能有效結合 2D 模型在平面解析度上的優勢與 3D 模型在空間連續性上的優勢，將 Dice Score 從早期的 0.36 大幅提升至 **0.7905**。
+
+### 2. 方法論 (Methodology)
+
+本研究的核心方法為 **多視圖集成 (Multi-view Ensemble)** 搭配 **Soft Voting**。
+
+#### 模型架構
+我們訓練了兩個獨立的 nnU-Net 模型：
+*   **2D nnU-Net**: 逐層 (Slice-by-slice) 進行分割，輸入尺寸為 $512 \times 512$。此模型對於邊緣細節（特別是右心室）的捕捉能力較強。
+*   **3D Low-resolution nnU-Net**: 將原始影像降採樣後進行 3D 卷積運算。此模型擁有更大的感受野 (Receptive Field)，能有效維持心臟結構的 3D 拓樸正確性（如心肌的環狀結構）。
+
+#### Soft Voting Ensemble (機率加權集成)
+這是 V6 版本的核心改進。不同於之前的 Hard Voting (直接對類別標籤投票)，Soft Voting 是對模型輸出的 **Softmax 機率圖 (Probability Maps)** 進行加權平均。
+
+假設 $P_{2d}(x)$ 和 $P_{3d}(x)$ 分別為 2D 和 3D 模型在體素 (Voxel) $x$ 處預測某類別的機率，最終機率 $P_{final}(x)$ 定義為：
+
+$$ P_{final}(x) = w_{2d} \cdot P_{2d}(x) + w_{3d} \cdot P_{3d}(x) $$
+
+我們根據驗證集 (Validation Set) 的表現，針對不同解剖結構設計了特定的權重矩陣 $W$：
+
+| 解剖結構 (Label) | 2D 權重 ($w_{2d}$) | 3D 權重 ($w_{3d}$) | 設計理由 |
+| :--- | :---: | :---: | :--- |
+| **Background (0)** | 0.5 | 0.5 | 中立 |
+| **Myocardium (1)** | 0.3 | **0.7** | 3D 模型更能維持心肌的環狀連續性 |
+| **Left Ventricle (2)** | 0.3 | **0.7** | 3D 模型對左心室的整體形狀掌握較佳 |
+| **Right Ventricle (3)** | **0.65** | 0.35 | 2D 模型對形狀不規則的右心室分割更精準 |
+
+#### 推論增強與後處理
+*   **TTA (Test Time Augmentation)**：推論時開啟多軸向鏡像翻轉，消除隨機誤差。
+*   **LCC (Keep Largest Connected Component)**：針對每個類別僅保留最大連通區域，移除雜訊。
+*   **Fill Holes**：填補左/右心室內部的孔洞。
+*   **Morphological Closing**：使用形態學閉運算平滑邊緣 (V8 新增)。
+
+### 3. 實驗過程與演進 (Evolution of Approaches)
+
+我們的方法經歷了多次迭代，以下是各階段的關鍵發現與困難解決：
+
+*   **Phase 1: 初期嘗試 (HW3 原始版本)**
+    *   **結果**: Dice Score **0.3635** (Underfitting)。
+    *   **問題**: 模型訓練不足，未處理資料型態與維度問題。
+
+*   **Phase 2: Baseline 建立**
+    *   **方法**: 2D + 3D Lowres Ensemble (Hard Voting)。
+    *   **結果**: Dice Score **0.7829**。
+    *   **發現**: 證明了 2D 與 3D Lowres 的互補性。
+
+*   **Phase 3: 錯誤的優化方向 (V2/V3)**
+    *   **方法**: 引入 3D Full-resolution 模型。
+    *   **結果**: 分數下降至 **0.77**。
+    *   **困難**: 3D Fullres 模型過擬合 (Overfitting)，且發生 float/uint8 型態轉換錯誤。
+    *   **解決**: 放棄 Fullres，專注於優化 Lowres 與 2D 的結合，並修復程式碼 Bug。
+
+*   **Phase 4 & 5: 回歸與修正 (V4/V5)**
+    *   **方法**: 回歸 3D Lowres + TTA + LCC/Fill Holes。
+    *   **結果**: Dice Score 回升至 **0.7833**。
+
+*   **Phase 6: Soft Voting 優化 (Current V6)**
+    *   **方法**: 改用 **Soft Voting** (機率加權)。
+    *   **結果**: Dice Score **0.7901**。
+    *   **突破**: 成功突破 0.79 瓶頸，證明保留信心資訊比單純投票更有效。
+
+*   **Phase 7: 過度集成 (V7)**
+    *   **方法**: 嘗試加入 3D Fullres (Fold 0 & Fold 1) 進行 4 模型集成。
+    *   **結果**: Dice Score 下降至 **0.7898**。
+    *   **分析**: 證實 3D Fullres 模型在此資料集上表現不佳，加入後反而引入雜訊，拖累整體表現。
+
+*   **Phase 8: 形態學優化 (Current V8)**
+    *   **方法**: 新增 **Morphological Closing**。
+    *   **結果**: Dice Score 提升至 **0.7905**。
+    *   **結論**: 細微的形態學處理能進一步提升邊界品質。
+
+### 4. 未來展望 (Future Work)
+目前的優化已將單一 Fold (Fold 0) 的潛力發揮至極限。為了突破 0.80 的大關，我們已啟動 **5-Fold Cross Validation** 計畫，預期透過消除資料切分的偏差，能進一步提升模型的泛化能力。
 
 ---
 
