@@ -27,7 +27,8 @@ while ($true) {
     # Fold Training Progress
     Write-Host "`n[Fold Progress]" -ForegroundColor Yellow
     for ($i=0; $i -le 4; $i++) {
-        $foldPath = "nnUNet_results\Dataset001_CardiacSeg\nnUNetTrainer__nnUNetPlans__3d_lowres\fold_$i"
+        # Updated to point to the Custom Trainer directory
+        $foldPath = "nnUNet_results\Dataset001_CardiacSeg\nnUNetTrainerCustomEpochs__nnUNetPlans__3d_lowres\fold_$i"
         if (Test-Path $foldPath) {
             $logFiles = Get-ChildItem "$foldPath\training_log_*.txt" -ErrorAction SilentlyContinue
             $logFile = $logFiles | Sort-Object LastWriteTime -Descending | Select-Object -First 1
@@ -96,7 +97,8 @@ while ($true) {
     
     # Latest Training Log
     Write-Host "`n[Latest Log]" -ForegroundColor Yellow
-    $allLogs = Get-ChildItem "nnUNet_results\Dataset001_CardiacSeg\nnUNetTrainer__nnUNetPlans__3d_lowres\fold_*\training_log_*.txt" -ErrorAction SilentlyContinue
+    # Updated to point to the Custom Trainer directory
+    $allLogs = Get-ChildItem "nnUNet_results\Dataset001_CardiacSeg\nnUNetTrainerCustomEpochs__nnUNetPlans__3d_lowres\fold_*\training_log_*.txt" -ErrorAction SilentlyContinue
     $latestLog = $allLogs | Sort-Object LastWriteTime -Descending | Select-Object -First 1
     if ($latestLog) {
         $recentLines = Get-Content $latestLog.FullName -Tail 100 -ErrorAction SilentlyContinue
