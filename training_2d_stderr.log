@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "C:\CardiacSeg\nnunet_train.py", line 144, in <module>
-    print("\n\u23ed\ufe0f  跳過預處理步驟（使用 --skip-preprocess）")
-UnicodeEncodeError: 'gbk' codec can't encode character '\u23ed' in position 2: illegal multibyte sequence

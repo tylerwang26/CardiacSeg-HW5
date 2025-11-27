@@ -1,157 +1,0 @@
-======================================
-  排程驗證預處理完整性
-======================================
-開始時間: 2025-11-15 16:02:33
-日誌檔案: /Users/tyler/Documents/GitHub/CardiacSeg/scheduled_verify_20251115_160233.log
-
-✓ 已載入環境變數
-偵測到訓練進程運行中，等待 5 分鐘後重試...
-偵測到訓練進程運行中，等待 5 分鐘後重試...
-✓ 訓練進程已結束或不存在，開始驗證
-
-執行驗證與補完...
-指令：nnUNetv2_plan_and_preprocess -d 001 --verify_dataset_integrity
-
-Fingerprint extraction...
-Dataset001_CardiacSeg
-Using <class 'nnunetv2.imageio.simpleitk_reader_writer.SimpleITKIO'> as reader/writer
-
-####################
-verify_dataset_integrity Done. 
-If you didn't see any error messages then your dataset is most likely OK!
-####################
-
-Experiment planning...
-
-############################
-INFO: You are using the old nnU-Net default planner. We have updated our recommendations. Please consider using those instead! Read more here: https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/resenc_presets.md
-############################
-
-Attempting to find 3d_lowres config. 
-Current spacing: [0.515      0.40636719 0.40636719]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [293.68932039 497.08737864 497.08737864]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.53045   0.4185582 0.4185582]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [285.13526251 482.60910548 482.60910548]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.5463635  0.43111495 0.43111495]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [276.83035195 468.55252959 468.55252959]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.56275441 0.4440484  0.4440484 ]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [268.76733199 454.90536853 454.90536853]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.57963704 0.45736985 0.45736985]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [260.93915728 441.6556976  441.6556976 ]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.59702615 0.47109095 0.47109095]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [253.33898765 428.79193942 428.79193942]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.61493693 0.48522367 0.48522367]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [245.96018218 416.30285381 416.30285381]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.63338504 0.49978038 0.49978038]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [238.79629338 404.17752797 404.17752797]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.65238659 0.5147738  0.5147738 ]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [231.84106153 392.40536696 392.40536696]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.67195819 0.53021701 0.53021701]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [225.08840926 380.97608443 380.97608443]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.69211694 0.54612352 0.54612352]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [218.53243617 369.87969362 369.87969362]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.71288044 0.56250722 0.56250722]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [212.16741376 359.10649866 359.10649866]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.73426686 0.57938244 0.57938244]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [205.98778035 348.64708608 348.64708608]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.75629486 0.59676391 0.59676391]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [199.98813626 338.49231658 338.49231658]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.77898371 0.61466683 0.61466683]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [194.16323909 328.63331707 328.63331707]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.80235322 0.63310684 0.63310684]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [188.50799911 319.06147288 319.06147288]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.82642382 0.65210004 0.65210004]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [183.01747487 309.76842027 309.76842027]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.85121653 0.67166304 0.67166304]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [177.6868688 300.7460391 300.7460391]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.87675303 0.69181294 0.69181294]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [172.51152311 291.98644573 291.98644573]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.90305562 0.71256732 0.71256732]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [167.48691564 283.48198614 283.48198614]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.93014729 0.73394434 0.73394434]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [162.60865596 275.22522927 275.22522927]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.9580517  0.75596267 0.75596267]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [157.87248152 267.20896045 267.20896045]
-Attempting to find 3d_lowres config. 
-Current spacing: [0.98679326 0.77864155 0.77864155]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [153.2742539 259.4261752 259.4261752]
-Attempting to find 3d_lowres config. 
-Current spacing: [1.01639705 0.8020008  0.8020008 ]. 
-Current patch size: (np.int64(96), np.int64(160), np.int64(160)). 
-Current median shape: [148.80995524 251.87007301 251.87007301]
-2D U-Net configuration:
-{'data_identifier': 'nnUNetPlans_2d', 'preprocessor_name': 'DefaultPreprocessor', 'batch_size': 12, 'patch_size': (np.int64(512), np.int64(512)), 'median_image_size_in_voxels': array([512., 512.]), 'spacing': array([0.39453125, 0.39453125]), 'normalization_schemes': ['CTNormalization'], 'use_mask_for_norm': [False], 'resampling_fn_data': 'resample_data_or_seg_to_shape', 'resampling_fn_seg': 'resample_data_or_seg_to_shape', 'resampling_fn_data_kwargs': {'is_seg': False, 'order': 3, 'order_z': 0, 'force_separate_z': None}, 'resampling_fn_seg_kwargs': {'is_seg': True, 'order': 1, 'order_z': 0, 'force_separate_z': None}, 'resampling_fn_probabilities': 'resample_data_or_seg_to_shape', 'resampling_fn_probabilities_kwargs': {'is_seg': False, 'order': 1, 'order_z': 0, 'force_separate_z': None}, 'architecture': {'network_class_name': 'dynamic_network_architectures.architectures.unet.PlainConvUNet', 'arch_kwargs': {'n_stages': 8, 'features_per_stage': (32, 64, 128, 256, 512, 512, 512, 512), 'conv_op': 'torch.nn.modules.conv.Conv2d', 'kernel_sizes': ((3, 3), (3, 3), (3, 3), (3, 3), (3, 3), (3, 3), (3, 3), (3, 3)), 'strides': ((1, 1), (2, 2), (2, 2), (2, 2), (2, 2), (2, 2), (2, 2), (2, 2)), 'n_conv_per_stage': (2, 2, 2, 2, 2, 2, 2, 2), 'n_conv_per_stage_decoder': (2, 2, 2, 2, 2, 2, 2), 'conv_bias': True, 'norm_op': 'torch.nn.modules.instancenorm.InstanceNorm2d', 'norm_op_kwargs': {'eps': 1e-05, 'affine': True}, 'dropout_op': None, 'dropout_op_kwargs': None, 'nonlin': 'torch.nn.LeakyReLU', 'nonlin_kwargs': {'inplace': True}}, '_kw_requires_import': ('conv_op', 'norm_op', 'dropout_op', 'nonlin')}, 'batch_dice': True}
-
-Using <class 'nnunetv2.imageio.simpleitk_reader_writer.SimpleITKIO'> as reader/writer
-3D lowres U-Net configuration:
-{'data_identifier': 'nnUNetPlans_3d_lowres', 'preprocessor_name': 'DefaultPreprocessor', 'batch_size': 2, 'patch_size': (np.int64(96), np.int64(160), np.int64(160)), 'median_image_size_in_voxels': (149, 252, 252), 'spacing': array([1.01639705, 0.8020008 , 0.8020008 ]), 'normalization_schemes': ['CTNormalization'], 'use_mask_for_norm': [False], 'resampling_fn_data': 'resample_data_or_seg_to_shape', 'resampling_fn_seg': 'resample_data_or_seg_to_shape', 'resampling_fn_data_kwargs': {'is_seg': False, 'order': 3, 'order_z': 0, 'force_separate_z': None}, 'resampling_fn_seg_kwargs': {'is_seg': True, 'order': 1, 'order_z': 0, 'force_separate_z': None}, 'resampling_fn_probabilities': 'resample_data_or_seg_to_shape', 'resampling_fn_probabilities_kwargs': {'is_seg': False, 'order': 1, 'order_z': 0, 'force_separate_z': None}, 'architecture': {'network_class_name': 'dynamic_network_architectures.architectures.unet.PlainConvUNet', 'arch_kwargs': {'n_stages': 6, 'features_per_stage': (32, 64, 128, 256, 320, 320), 'conv_op': 'torch.nn.modules.conv.Conv3d', 'kernel_sizes': ((3, 3, 3), (3, 3, 3), (3, 3, 3), (3, 3, 3), (3, 3, 3), (3, 3, 3)), 'strides': ((1, 1, 1), (2, 2, 2), (2, 2, 2), (2, 2, 2), (2, 2, 2), (1, 2, 2)), 'n_conv_per_stage': (2, 2, 2, 2, 2, 2), 'n_conv_per_stage_decoder': (2, 2, 2, 2, 2), 'conv_bias': True, 'norm_op': 'torch.nn.modules.instancenorm.InstanceNorm3d', 'norm_op_kwargs': {'eps': 1e-05, 'affine': True}, 'dropout_op': None, 'dropout_op_kwargs': None, 'nonlin': 'torch.nn.LeakyReLU', 'nonlin_kwargs': {'inplace': True}}, '_kw_requires_import': ('conv_op', 'norm_op', 'dropout_op', 'nonlin')}, 'batch_dice': False, 'next_stage': '3d_cascade_fullres'}
-
-3D fullres U-Net configuration:
-{'data_identifier': 'nnUNetPlans_3d_fullres', 'preprocessor_name': 'DefaultPreprocessor', 'batch_size': 2, 'patch_size': (np.int64(96), np.int64(160), np.int64(160)), 'median_image_size_in_voxels': array([302.5, 512. , 512. ]), 'spacing': array([0.5       , 0.39453125, 0.39453125]), 'normalization_schemes': ['CTNormalization'], 'use_mask_for_norm': [False], 'resampling_fn_data': 'resample_data_or_seg_to_shape', 'resampling_fn_seg': 'resample_data_or_seg_to_shape', 'resampling_fn_data_kwargs': {'is_seg': False, 'order': 3, 'order_z': 0, 'force_separate_z': None}, 'resampling_fn_seg_kwargs': {'is_seg': True, 'order': 1, 'order_z': 0, 'force_separate_z': None}, 'resampling_fn_probabilities': 'resample_data_or_seg_to_shape', 'resampling_fn_probabilities_kwargs': {'is_seg': False, 'order': 1, 'order_z': 0, 'force_separate_z': None}, 'architecture': {'network_class_name': 'dynamic_network_architectures.architectures.unet.PlainConvUNet', 'arch_kwargs': {'n_stages': 6, 'features_per_stage': (32, 64, 128, 256, 320, 320), 'conv_op': 'torch.nn.modules.conv.Conv3d', 'kernel_sizes': ((3, 3, 3), (3, 3, 3), (3, 3, 3), (3, 3, 3), (3, 3, 3), (3, 3, 3)), 'strides': ((1, 1, 1), (2, 2, 2), (2, 2, 2), (2, 2, 2), (2, 2, 2), (1, 2, 2)), 'n_conv_per_stage': (2, 2, 2, 2, 2, 2), 'n_conv_per_stage_decoder': (2, 2, 2, 2, 2), 'conv_bias': True, 'norm_op': 'torch.nn.modules.instancenorm.InstanceNorm3d', 'norm_op_kwargs': {'eps': 1e-05, 'affine': True}, 'dropout_op': None, 'dropout_op_kwargs': None, 'nonlin': 'torch.nn.LeakyReLU', 'nonlin_kwargs': {'inplace': True}}, '_kw_requires_import': ('conv_op', 'norm_op', 'dropout_op', 'nonlin')}, 'batch_dice': True}
-
-Plans were saved to /Users/tyler/Documents/GitHub/CardiacSeg/nnUNet_preprocessed/Dataset001_CardiacSeg/nnUNetPlans.json
-Preprocessing...
-Preprocessing dataset Dataset001_CardiacSeg
-Configuration: 2d...
-  0%|          | 0/50 [00:00<?, ?it/s]  2%|▏         | 1/50 [01:04<52:33, 64.35s/it]  4%|▍         | 2/50 [01:04<21:26, 26.80s/it]  6%|▌         | 3/50 [01:09<13:13, 16.88s/it]  8%|▊         | 4/50 [01:32<14:47, 19.28s/it] 10%|█         | 5/50 [01:40<11:10, 14.89s/it] 12%|█▏        | 6/50 [01:44<08:14, 11.23s/it] 14%|█▍        | 7/50 [01:45<05:49,  8.13s/it] 16%|█▌        | 8/50 [01:55<05:55,  8.47s/it] 18%|█▊        | 9/50 [02:04<05:58,  8.76s/it] 20%|██        | 10/50 [02:05<04:13,  6.34s/it] 22%|██▏       | 11/50 [02:26<07:05, 10.91s/it] 24%|██▍       | 12/50 [02:50<09:21, 14.78s/it] 26%|██▌       | 13/50 [03:06<09:19, 15.13s/it] 28%|██▊       | 14/50 [03:12<07:33, 12.59s/it] 30%|███       | 15/50 [03:30<08:11, 14.03s/it] 32%|███▏      | 16/50 [03:43<07:50, 13.85s/it] 34%|███▍      | 17/50 [03:56<07:21, 13.38s/it] 36%|███▌      | 18/50 [03:58<05:26, 10.22s/it] 38%|███▊      | 19/50 [04:06<04:48,  9.32s/it] 40%|████      | 20/50 [04:09<03:44,  7.48s/it] 42%|████▏     | 21/50 [04:15<03:29,  7.22s/it] 44%|████▍     | 22/50 [04:33<04:45, 10.19s/it] 46%|████▌     | 23/50 [04:59<06:46, 15.05s/it] 48%|████▊     | 24/50 [05:06<05:27, 12.59s/it] 50%|█████     | 25/50 [05:14<04:41, 11.26s/it] 52%|█████▏    | 26/50 [05:30<05:03, 12.67s/it] 54%|█████▍    | 27/50 [05:35<04:02, 10.55s/it] 56%|█████▌    | 28/50 [05:39<03:05,  8.42s/it] 58%|█████▊    | 29/50 [05:54<03:41, 10.56s/it] 60%|██████    | 30/50 [06:04<03:25, 10.27s/it] 62%|██████▏   | 31/50 [06:05<02:23,  7.56s/it] 64%|██████▍   | 32/50 [06:21<02:59,  9.99s/it] 66%|██████▌   | 33/50 [06:32<02:55, 10.34s/it] 68%|██████▊   | 34/50 [06:56<03:52, 14.53s/it] 70%|███████   | 35/50 [07:05<03:09, 12.63s/it] 72%|███████▏  | 36/50 [07:07<02:14,  9.64s/it] 74%|███████▍  | 37/50 [07:09<01:35,  7.31s/it] 76%|███████▌  | 38/50 [07:12<01:10,  5.90s/it] 78%|███████▊  | 39/50 [07:33<01:54, 10.37s/it] 80%|████████  | 40/50 [08:05<02:51, 17.11s/it] 82%|████████▏ | 41/50 [08:16<02:15, 15.04s/it] 84%|████████▍ | 42/50 [08:52<02:50, 21.35s/it] 86%|████████▌ | 43/50 [08:56<01:53, 16.24s/it] 88%|████████▊ | 44/50 [09:04<01:22, 13.78s/it] 90%|█████████ | 45/50 [09:15<01:04, 12.87s/it] 92%|█████████▏| 46/50 [09:28<00:51, 12.89s/it] 94%|█████████▍| 47/50 [09:36<00:34, 11.59s/it] 96%|█████████▌| 48/50 [09:38<00:17,  8.59s/it] 98%|█████████▊| 49/50 [09:48<00:09,  9.03s/it]100%|██████████| 50/50 [10:04<00:00, 11.24s/it]100%|██████████| 50/50 [10:04<00:00, 12.10s/it]
-Configuration: 3d_fullres...
-  0%|          | 0/50 [00:00<?, ?it/s]  2%|▏         | 1/50 [01:03<51:52, 63.52s/it]  4%|▍         | 2/50 [01:10<24:10, 30.22s/it]  6%|▌         | 3/50 [01:14<14:22, 18.36s/it]  8%|▊         | 4/50 [01:16<09:10, 11.97s/it] 10%|█         | 5/50 [01:53<15:35, 20.79s/it] 12%|█▏        | 6/50 [01:57<11:02, 15.05s/it] 14%|█▍        | 7/50 [02:01<08:22, 11.69s/it] 16%|█▌        | 8/50 [02:09<07:15, 10.38s/it] 18%|█▊        | 9/50 [02:39<11:17, 16.53s/it] 20%|██        | 10/50 [02:45<08:54, 13.37s/it] 22%|██▏       | 11/50 [02:57<08:19, 12.81s/it] 24%|██▍       | 12/50 [03:31<12:16, 19.39s/it] 26%|██▌       | 13/50 [03:31<08:21, 13.55s/it] 28%|██▊       | 14/50 [03:52<09:20, 15.56s/it] 30%|███       | 15/50 [03:55<06:53, 11.83s/it] 32%|███▏      | 16/50 [04:37<11:56, 21.07s/it] 34%|███▍      | 17/50 [04:38<08:14, 14.99s/it] 36%|███▌      | 18/50 [04:46<06:54, 12.96s/it] 38%|███▊      | 19/50 [04:51<05:20, 10.34s/it] 40%|████      | 20/50 [05:30<09:27, 18.92s/it] 42%|████▏     | 21/50 [05:33<06:50, 14.15s/it] 44%|████▍     | 22/50 [05:44<06:11, 13.26s/it] 46%|████▌     | 23/50 [05:56<05:47, 12.88s/it] 48%|████▊     | 24/50 [06:34<08:48, 20.32s/it] 50%|█████     | 25/50 [06:37<06:24, 15.37s/it] 52%|█████▏    | 26/50 [06:45<05:13, 13.05s/it] 54%|█████▍    | 27/50 [07:02<05:24, 14.12s/it] 56%|█████▌    | 28/50 [07:31<06:51, 18.72s/it] 58%|█████▊    | 29/50 [07:36<05:07, 14.66s/it] 60%|██████    | 30/50 [07:41<03:54, 11.72s/it] 62%|██████▏   | 31/50 [07:57<04:04, 12.88s/it] 64%|██████▍   | 32/50 [08:15<04:22, 14.59s/it] 66%|██████▌   | 33/50 [08:26<03:48, 13.45s/it] 68%|██████▊   | 34/50 [08:39<03:30, 13.16s/it] 70%|███████   | 35/50 [09:03<04:08, 16.54s/it] 72%|███████▏  | 36/50 [09:08<03:01, 12.97s/it] 74%|███████▍  | 37/50 [09:08<01:59,  9.20s/it] 76%|███████▌  | 38/50 [09:45<03:32, 17.69s/it] 78%|███████▊  | 39/50 [09:46<02:16, 12.41s/it] 80%|████████  | 40/50 [09:46<01:29,  8.91s/it] 82%|████████▏ | 41/50 [10:10<02:00, 13.34s/it] 84%|████████▍ | 42/50 [10:53<02:56, 22.11s/it] 86%|████████▌ | 43/50 [11:02<02:08, 18.34s/it] 88%|████████▊ | 44/50 [11:14<01:38, 16.43s/it] 90%|█████████ | 45/50 [11:33<01:25, 17.19s/it] 92%|█████████▏| 46/50 [12:03<01:24, 21.12s/it] 94%|█████████▍| 47/50 [12:21<01:00, 20.23s/it] 96%|█████████▌| 48/50 [12:26<00:31, 15.54s/it] 98%|█████████▊| 49/50 [12:29<00:11, 11.85s/it]100%|██████████| 50/50 [12:50<00:00, 14.61s/it]100%|██████████| 50/50 [12:50<00:00, 15.42s/it]
-Configuration: 3d_lowres...
-  0%|          | 0/50 [00:00<?, ?it/s]  2%|▏         | 1/50 [00:18<15:29, 18.96s/it]  4%|▍         | 2/50 [00:19<06:20,  7.93s/it]  6%|▌         | 3/50 [00:19<03:35,  4.59s/it]  8%|▊         | 4/50 [00:22<02:54,  3.80s/it] 10%|█         | 5/50 [00:24<02:17,  3.06s/it] 12%|█▏        | 6/50 [00:25<01:42,  2.34s/it] 14%|█▍        | 7/50 [00:25<01:11,  1.67s/it] 16%|█▌        | 8/50 [00:27<01:17,  1.84s/it] 18%|█▊        | 9/50 [00:35<02:33,  3.75s/it] 20%|██        | 10/50 [00:35<01:44,  2.62s/it] 22%|██▏       | 11/50 [00:37<01:36,  2.48s/it] 24%|██▍       | 12/50 [00:41<01:48,  2.86s/it] 26%|██▌       | 13/50 [00:46<02:07,  3.46s/it] 28%|██▊       | 14/50 [00:49<01:57,  3.26s/it] 30%|███       | 15/50 [00:50<01:31,  2.62s/it] 32%|███▏      | 16/50 [00:51<01:16,  2.26s/it] 34%|███▍      | 17/50 [00:53<01:07,  2.05s/it] 36%|███▌      | 18/50 [00:57<01:31,  2.86s/it] 38%|███▊      | 19/50 [00:58<01:10,  2.28s/it] 40%|████      | 20/50 [00:59<00:48,  1.63s/it] 42%|████▏     | 21/50 [01:04<01:24,  2.93s/it] 44%|████▍     | 22/50 [01:07<01:21,  2.92s/it] 46%|████▌     | 23/50 [01:09<01:11,  2.63s/it] 48%|████▊     | 24/50 [01:13<01:19,  3.05s/it] 50%|█████     | 25/50 [01:14<01:01,  2.44s/it] 52%|█████▏    | 26/50 [01:15<00:46,  1.93s/it] 54%|█████▍    | 27/50 [01:18<00:50,  2.22s/it] 56%|█████▌    | 28/50 [01:19<00:42,  1.95s/it] 58%|█████▊    | 29/50 [01:23<00:54,  2.57s/it] 60%|██████    | 30/50 [01:25<00:48,  2.42s/it] 62%|██████▏   | 31/50 [01:29<00:54,  2.84s/it] 64%|██████▍   | 32/50 [01:31<00:45,  2.55s/it] 66%|██████▌   | 33/50 [01:31<00:30,  1.82s/it] 68%|██████▊   | 34/50 [01:35<00:40,  2.51s/it] 70%|███████   | 35/50 [01:36<00:30,  2.01s/it] 72%|███████▏  | 36/50 [01:40<00:37,  2.67s/it] 74%|███████▍  | 37/50 [01:43<00:34,  2.62s/it] 76%|███████▌  | 38/50 [01:46<00:31,  2.64s/it] 78%|███████▊  | 39/50 [01:49<00:31,  2.90s/it] 80%|████████  | 40/50 [01:50<00:23,  2.40s/it] 82%|████████▏ | 41/50 [01:55<00:28,  3.20s/it] 84%|████████▍ | 42/50 [02:01<00:30,  3.86s/it] 86%|████████▌ | 43/50 [02:06<00:28,  4.13s/it] 88%|████████▊ | 44/50 [02:07<00:19,  3.17s/it] 90%|█████████ | 45/50 [02:09<00:15,  3.02s/it] 92%|█████████▏| 46/50 [02:12<00:12,  3.08s/it] 94%|█████████▍| 47/50 [02:14<00:07,  2.65s/it] 96%|█████████▌| 48/50 [02:14<00:03,  1.95s/it] 98%|█████████▊| 49/50 [02:15<00:01,  1.58s/it]100%|██████████| 50/50 [02:18<00:00,  1.89s/it]100%|██████████| 50/50 [02:18<00:00,  2.77s/it]
-Traceback (most recent call last):
-  File "/Users/tyler/Documents/GitHub/CardiacSeg/./.venv/bin/nnUNetv2_plan_and_preprocess", line 7, in <module>
-    sys.exit(plan_and_preprocess_entry())
-             ~~~~~~~~~~~~~~~~~~~~~~~~~^^
-  File "/Users/tyler/Documents/GitHub/CardiacSeg/.venv/lib/python3.13/site-packages/nnunetv2/experiment_planning/plan_and_preprocess_entrypoints.py", line 196, in plan_and_preprocess_entry
-    preprocess(args.d, plans_identifier, args.c, np, args.verbose)
-    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/tyler/Documents/GitHub/CardiacSeg/.venv/lib/python3.13/site-packages/nnunetv2/experiment_planning/plan_and_preprocess_api.py", line 150, in preprocess
-    preprocess_dataset(d, plans_identifier, configurations, num_processes, verbose)
-    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/tyler/Documents/GitHub/CardiacSeg/.venv/lib/python3.13/site-packages/nnunetv2/experiment_planning/plan_and_preprocess_api.py", line 133, in preprocess_dataset
-    from distutils.file_util import copy_file
-ModuleNotFoundError: No module named 'distutils'

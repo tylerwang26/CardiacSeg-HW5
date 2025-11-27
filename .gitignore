@@ -56,10 +56,13 @@ temp_val_input/
 temp_val_input_2/
 temp_ensemble_raw/
 
-# Temporary Inference Outputs (Optional: Uncomment if you don't want to upload these)
-# inference_*/
-# temp_*/
+# Temporary Inference Outputs (Too large for GitHub)
+inference_*/
+temp_*/
 
-# Large Zip Files (Optional: Uncomment if you don't want to upload submissions)
-# submission_*.zip
+# Large Zip Files (Keep only the best version locally)
+submission_*.zip
+
+# Large submission folders (Keep only essential)
+submission_optimized_v8/
 

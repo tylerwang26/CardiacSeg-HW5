@@ -1,2 +1,0 @@
-腳本 base_dir: C:\CardiacSeg
-dataset.json 已存在於 C:\CardiacSeg\nnUNet_raw\Dataset001_CardiacSeg\dataset.json，跳過生成。若需強制重新生成，請設定 force_regenerate=True。
