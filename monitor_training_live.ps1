@@ -14,34 +14,40 @@ function Get-FoldStatus {
     $foldPath = Join-Path $BasePath "fold_$Fold"
     if (Test-Path $foldPath) {
         $logFiles = Get-ChildItem "$foldPath\training_log_*.txt" -ErrorAction SilentlyContinue
-        $logFile = $logFiles | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-        
-        if ($logFile) {
-            $lastUpdate = $logFile.LastWriteTime
-            $timeDiff = (Get-Date) - $lastUpdate
-            
-            # Read recent lines
-            $recentLines = Get-Content $logFile.FullName -Tail 50 -ErrorAction SilentlyContinue
-            
-            # Parse Epoch (support both 'Epoch N' and 'Current epoch: N')
-            $epochLines = $recentLines | Where-Object {$_ -match "Epoch \d+" -or $_ -match "Current epoch: \d+"}
-            $currentEpoch = 0
-            if ($epochLines) {
-                $lastEpochLine = $epochLines | Select-Object -Last 1
-                if ($lastEpochLine -match "Epoch (\d+)") {
-                    $currentEpoch = [int]$matches[1]
-                } elseif ($lastEpochLine -match "Current epoch: (\d+)") {
-                    $currentEpoch = [int]$matches[1]
+        if ($logFiles) {
+            # 合併所有 log 檔案內容
+            $allLines = @()
+            $lastUpdate = $null
+            foreach ($logFile in $logFiles) {
+                $lines = Get-Content $logFile.FullName -ErrorAction SilentlyContinue
+                $allLines += $lines
+                if (-not $lastUpdate -or $logFile.LastWriteTime -gt $lastUpdate) {
+                    $lastUpdate = $logFile.LastWriteTime
                 }
             }
-            
+            $timeDiff = (Get-Date) - $lastUpdate
+
+            # 解析所有 epoch 行，找最大 epoch
+            $epochNumbers = @()
+            foreach ($line in $allLines) {
+                if ($line -match "Epoch (\d+)") {
+                    $epochNumbers += [int]$matches[1]
+                } elseif ($line -match "Current epoch: (\d+)") {
+                    $epochNumbers += [int]$matches[1]
+                }
+            }
+            $currentEpoch = 0
+            if ($epochNumbers.Count -gt 0) {
+                $currentEpoch = ($epochNumbers | Measure-Object -Maximum).Maximum
+            }
+
             $statusColor = "Yellow"
             $statusText = "STOPPED"
             if ($timeDiff.TotalMinutes -lt 10) {
                 $statusColor = "Green"
                 $statusText = "RUNNING"
             }
-            
+
             Write-Host "  $Label Fold $Fold" -NoNewline -ForegroundColor $statusColor
             Write-Host ": $statusText (Epoch $currentEpoch/$TotalEpochs) - Updated $([math]::Round($timeDiff.TotalMinutes, 1)) min ago"
         } else {
