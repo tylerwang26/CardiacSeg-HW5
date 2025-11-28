@@ -3914,3 +3914,23 @@ Ran terminal command: & "c:\CardiacSeg\train_remaining_3d_lowres.ps1"
 您可以隨時查看終端機或 nnUNet_results 資料夾中的 log 檔來監控訓練進度。這需要一些時間，請耐心等待。
 
 已進行變更。
+
+Submission data validation is fail. In your submission, the image size (386, 512, 512) is different from the ground truth torch.Size([512, 512, 386]), please check: patient0051.nii.gz
+
+---
+
+非常抱歉，我忽略了維度轉置的問題。
+
+問題原因：
+nnU-Net 的預測結果通常是 (Z, Y, X) 或 (Z, X, Y) 的格式，而原始 NIfTI 影像的維度是 (X, Y, Z)。在 V12 的腳本中，我直接儲存了 numpy array，導致維度順序錯誤 (例如變成 386, 512, 512 而不是 512, 512, 386)。
+
+修正措施：
+我已經更新了 run_final_v12_single_fold_fixed.py，加入了自動轉置檢查：
+如果預測結果的維度與原始影像不符，會自動執行 transpose(2, 1, 0) 將其轉回正確的 (X, Y, Z) 格式。
+
+執行結果：
+腳本已重新執行，並顯示了轉置訊息 (例如 Transposing patient0051 from (386, 512, 512) to (512, 512, 386))。
+新的提交檔案已生成：
+submission_final_v12_20251126.zip
+
+請再次嘗試上傳此檔案。這次維度應該是正確的。
