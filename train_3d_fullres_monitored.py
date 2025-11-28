@@ -4,6 +4,7 @@ import subprocess
 import time
 import re
 import threading
+import argparse
 from pathlib import Path
 
 # Configuration
@@ -44,16 +45,13 @@ def get_latest_log_file(trainer_output_dir):
     return os.path.join(trainer_output_dir, files[-1])
 
 def monitor_training(process, trainer_output_dir):
-    print(f"[*] 啟動監控線程... 目標 Dice: {TARGET_DICE}")
     print(f"[*] 監控目錄: {trainer_output_dir}")
     
     best_dice = 0.0
     last_epoch = -1
-    
     # Wait for directory to be created
     while not os.path.exists(trainer_output_dir) and process.poll() is None:
         time.sleep(5)
-        
     while process.poll() is None:
         log_file = get_latest_log_file(trainer_output_dir)
         if log_file:
@@ -94,18 +92,38 @@ def monitor_training(process, trainer_output_dir):
         time.sleep(CHECK_INTERVAL)
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--fold', type=int, default=0)
+    parser.add_argument('--max_epochs', type=int, default=1000)
+    args = parser.parse_args()
+
+    FOLD = str(args.fold)
+    MAX_EPOCHS = args.max_epochs
+    os.environ["nnUNet_n_epochs"] = str(MAX_EPOCHS)
+
     print(f"=== 啟動 3D Fullres 訓練 (Dataset {DATASET_ID}) ===")
     print(f"配置: {CONFIG}, Fold: {FOLD}, Device: {DEVICE}")
     print(f"最大 Epochs: {MAX_EPOCHS}")
     print(f"早停目標 Dice: {TARGET_DICE}")
     
+    # Determine Python Executable (Prefer venv)
+    venv_python = os.path.join(BASE_DIR, ".venv", "Scripts", "python.exe")
+    if os.path.exists(venv_python):
+        python_exe = venv_python
+        print(f"Using venv python: {python_exe}")
+    else:
+        python_exe = sys.executable
+        print(f"Using system python: {python_exe}")
+
     # Command
+    # Use patched runner to fix TypeError: str expected, not int
     cmd = [
-        sys.executable, "-m", "nnunetv2.run.run_training",
+        python_exe, "run_training_patched.py",
         DATASET_ID, CONFIG, FOLD,
         "-p", "nnUNetPlans",
         "-device", DEVICE,
-        "--npz" # Save softmax predictions for validation
+        "--npz", # Save softmax predictions for validation
+        "--c" # Continue training
     ]
     
     print(f"執行指令: {' '.join(cmd)}")

@@ -50,32 +50,33 @@ def get_test_cases():
 def postprocess_segmentation(segmentation):
     """
     Applies LCC, Fill Holes, and Morphological Closing.
+    Matches V8 implementation exactly.
     """
     cleaned_seg = np.zeros_like(segmentation)
     
-    # Process each class
-    for class_idx in [1, 2, 3]:
-        class_mask = (segmentation == class_idx)
-        
-        if not np.any(class_mask):
+    for label_id in [1, 2, 3]:
+        mask = (segmentation == label_id)
+        if not np.any(mask):
             continue
             
-        # 1. Keep Largest Connected Component
-        labeled_mask, num_features = label_cc(class_mask)
+        # 1. Morphological Closing (V8 Order: 1st)
+        # Smooths boundaries and fills small gaps
+        mask = binary_closing(mask, structure=np.ones((3,3,3)))
+            
+        # 2. Keep Largest Connected Component (V8 Order: 2nd)
+        labeled_mask, num_features = label_cc(mask)
         if num_features > 1:
-            sizes = [np.sum(labeled_mask == i) for i in range(1, num_features + 1)]
-            largest_component_label = np.argmax(sizes) + 1
-            class_mask = (labeled_mask == largest_component_label)
+            component_sizes = np.bincount(labeled_mask.ravel())
+            component_sizes[0] = 0
+            largest_component = component_sizes.argmax()
+            mask = (labeled_mask == largest_component)
             
-        # 2. Fill Holes
-        # Fill holes in each slice to avoid 3D topology issues
-        for i in range(class_mask.shape[2]):
-            class_mask[:, :, i] = binary_fill_holes(class_mask[:, :, i])
+        # 3. Fill Holes (Only for LV=2 and RV=3) (V8 Order: 3rd)
+        # Uses 3D fill holes like V8
+        if label_id in [2, 3]:
+            mask = binary_fill_holes(mask)
             
-        # 3. Morphological Closing (smooth boundaries)
-        class_mask = binary_closing(class_mask, iterations=1)
-        
-        cleaned_seg[class_mask] = class_idx
+        cleaned_seg[mask] = label_id
         
     return cleaned_seg
 
