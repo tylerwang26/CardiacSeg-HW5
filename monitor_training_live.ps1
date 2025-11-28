@@ -23,12 +23,14 @@ function Get-FoldStatus {
             # Read recent lines
             $recentLines = Get-Content $logFile.FullName -Tail 50 -ErrorAction SilentlyContinue
             
-            # Parse Epoch
-            $epochLines = $recentLines | Where-Object {$_ -match "Epoch \d+"}
+            # Parse Epoch (support both 'Epoch N' and 'Current epoch: N')
+            $epochLines = $recentLines | Where-Object {$_ -match "Epoch \d+" -or $_ -match "Current epoch: \d+"}
             $currentEpoch = 0
             if ($epochLines) {
                 $lastEpochLine = $epochLines | Select-Object -Last 1
                 if ($lastEpochLine -match "Epoch (\d+)") {
+                    $currentEpoch = [int]$matches[1]
+                } elseif ($lastEpochLine -match "Current epoch: (\d+)") {
                     $currentEpoch = [int]$matches[1]
                 }
             }

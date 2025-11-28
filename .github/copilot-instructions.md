@@ -59,76 +59,31 @@ This document defines the rules, coding standards, workflow guidelines, referenc
 -   When encountering zlib.error while loading the .npz preprocessed data, regenerate the preprocessed files.
 -   When there is a ParserError in monitor_training_live.ps1, the fix is to enclose `$epochTimestamp` within curly braces, which is the standard way to clearly delineate variable names in PowerShell strings by replacing `$epochTimestamp` with `${epochTimestamp}`.
 - If you encounter `OSError: [WinError 1455] The paging file is too small` error, this indicates a memory issue. Consider increasing pagefile size or optimizing memory usage.
-- When encountering a `KeyError: 'kwargs'` during custom trainer execution, this stems from a signature mismatch. The custom `__init__` must match the parent class's signature exactly, including the `device` parameter, to avoid parameter passing errors. Remove the `**kwargs` completely.
-- If the terminal shows a `KeyboardInterrupt` and `OSError: [WinError 6] The handle is invalid`, it indicates the training process has crashed. This is often due to resource exhaustion, such as the paging file being too small, or file access errors. Restart the process, ensuring sufficient resources.
-- If `Submission data validation is fail. In your submission, the image size (386, 512, 512) is different from the ground truth torch.Size([512, 512, 386]), please check: patient0051.nii.gz`, it indicates a dimension mismatch. This means you will need to transpose the final segmentation before saving.
-- If there is a `list index out of range` error, check for files without channel IDs in the `imagesTs` folder.
-- If you encounter the error "fatal: Unable to create ;C:/CardiacSegt/.get/inex.lock': File exists", it indicates a Git lock file issue. The resolution is to remove the lock file.
-- When a dimension mismatch is encountered during validation, ensure that the final segmentation is transposed before saving.
-- When the training process crashes, ensure that training is resumed from the last saved checkpoint.
-- When training crashes with a `KeyboardInterrupt` and `OSError: [WinError 6] The handle is invalid`, and there are discrepancies in logs, it may indicate a file access or buffer issue. Even though the terminal output may continue, the process may have failed to save data to disk.
-- When a dimension mismatch is encountered, and the submission validation fails with `Submission data validation is fail. In your submission, the image size (386, 512, 512) is different from the ground truth torch.Size([512, 512, 386])`, it indicates a dimension mismatch and that you will need to transpose the final segmentation before saving.
-- If the PowerShell script, `monitor_training_live.ps1`, is throwing a `ParserError`, it indicates a syntax issue. The resolution is to enclose `$epochTimestamp` within curly braces, replacing `$epochTimestamp` with `${epochTimestamp}`.
-- If you encounter `OSError: [WinError 1455] The paging file is too small` error, this indicates a memory issue. Consider increasing pagefile size or optimizing memory usage.
-- If you encounter the error "fatal: Unable to create 'C:/.../.git/index.lock': File exists", it indicates that another Git process is running. Terminate any other Git processes and try again. If the error persists, manually remove the `index.lock` file.
-- If `git add .` hangs, it may be due to a large number of files or large files. Verify .gitignore is set up correctly, and if it still hangs, try adding smaller batches of files to identify the problematic ones.
-- If you encounter "LF will be replaced by CRLF" warnings, it indicates that Git is automatically converting line endings. This is usually safe to ignore, but you can disable it by setting `git config --global core.safecrlf false`.
-- The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
+-   When encountering a `KeyError: 'kwargs'` during custom trainer execution, this stems from a signature mismatch. The custom `__init__` must match the parent class's signature exactly, including the `device` parameter, to avoid parameter passing errors. Remove the `**kwargs` completely.
+-   If the terminal shows a `KeyboardInterrupt` and `OSError: [WinError 6] The handle is invalid`, it indicates the training process has crashed. This is often due to resource exhaustion, such as the paging file being too small, or file access errors. Restart the process, ensuring sufficient resources.
+-   If `Submission data validation is fail. In your submission, the image size (386, 512, 512) is different from the ground truth torch.Size([512, 512, 386]), please check: patient0051.nii.gz`, it indicates a dimension mismatch. This means you will need to transpose the final segmentation before saving.
+-   If there is a `list index out of range` error, check for files without channel IDs in the `imagesTs` folder.
+-   If you encounter the error "fatal: Unable to create ;C:/CardiacSegt/.get/inex.lock': File exists", it indicates a Git lock file issue. The resolution is to remove the lock file.
+-   When a dimension mismatch is encountered during validation, ensure that the final segmentation is transposed before saving.
+-   When the training process crashes, ensure that training is resumed from the last saved checkpoint.
+-   When training crashes with a `KeyboardInterrupt` and `OSError: [WinError 6] The handle is invalid`, and there are discrepancies in logs, it may indicate a file access or buffer issue. Even though the terminal output may continue, the process may have failed to save data to disk.
+-   When a dimension mismatch is encountered, and the submission validation fails with `Submission data validation is fail. In your submission, the image size (386, 512, 512) is different from the ground truth torch.Size([512, 512, 386])`, it indicates a dimension mismatch and that you will need to transpose the final segmentation before saving.
+-   If the PowerShell script, `monitor_training_live.ps1`, is throwing a `ParserError`, it indicates a syntax issue. The resolution is to enclose `$epochTimestamp` within curly braces, replacing `$epochTimestamp` with `${epochTimestamp}`.
+-   If you encounter `OSError: [WinError 1455] The paging file is too small` error, this indicates a memory issue. Consider increasing pagefile size or optimizing memory usage.
+-   If you encounter the error "fatal: Unable to create 'C:/.../.git/index.lock': File exists", it indicates that another Git process is running. Terminate any other Git processes and try again. If the error persists, manually remove the `index.lock` file.
+-   If `git add .` hangs, it may be due to a large number of files or large files. Verify .gitignore is set up correctly, and if it still hangs, try adding smaller batches of files to identify the problematic ones.
+-   If you encounter "LF will be replaced by CRLF" warnings, it indicates that Git is automatically converting line endings. This is usually safe to ignore, but you can disable it by setting `git config --global core.safecrlf false`.
+-   The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
 -   The Python script, `monitor_training_live.ps1`, is throwing a `ParserError`. The resolution is to enclose `$epochTimestamp` within curly braces, replacing `$epochTimestamp` with `${epochTimestamp}`.
 -   To prevent system crashes, add `$env:nnUNet_n_proc_DA = "2"` to the training script when encountering `OSError: [WinError 1455] The paging file is too small`.
 -   To ensure the custom epoch count works, the training script should use the `nnUNetTrainerCustomEpochs` trainer.
 -   The `nnUNet_n_epochs` variable is not correctly set. nnU-Net uses a default of 1000 epochs. To fix this, create a custom trainer or modify the plans.
 - The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
 - If you encounter the error "fatal: Unable to create 'C:/.../.git/index.lock': File exists", it indicates that another Git process is running. Terminate any other Git processes and try again. If the error persists, manually remove the `index.lock` file.
-- If `git add .` hangs, it may be due to a large number of files or large files. Verify .gitignore is set up correctly, and if it still hangs, try adding smaller batches of files to identify the problematic ones.
-- If you encounter "LF will be replaced by CRLF" warnings, it indicates that Git is automatically converting line endings. This is usually safe to ignore, but you can disable it by setting `git config --global core.safecrlf false`.
-- The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
+-   If `git add .` hangs, it may be due to a large number of files or large files. Verify .gitignore is set up correctly, and if it still hangs, try adding smaller batches of files to identify the problematic ones.
+-   If you encounter "LF will be replaced by CRLF" warnings, it indicates that Git is automatically converting line endings. This is usually safe to ignore, but you can disable it by setting `git config --global core.safecrlf false`.
+-   The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
 - Interacting with the terminal may inadvertently interrupt the training process.
-- If there is a "file in use" error when attempting to remove files, Visual Studio Code, especially its integrated Git extension, may be holding a lock on the file. Close additional terminal windows and any other applications that might have a file handle open.
-- When encountering the error "Git: fatal: Unable to create ;C:/CardiacSegt/.get/inex.lock': File exists", it indicates a Git lock file issue. The resolution is to remove the lock file.
-- If there is a `list index out of range` error, check for files without channel IDs in the `imagesTs` folder
-- The `Submission data validation is fail` error is often caused by dimension mismatch.
-- If a submission fails with `Submission data validation is fail. In your submission, the image size (386, 512, 512) is different from the ground truth torch.Size([512, 512, 386])`, it indicates a dimension mismatch, and that the final segmentation must be transposed before saving.
-- `Submission data validation is fail. In your submission, the image size (386, 512, 512) is different from the ground truth torch.Size([512, 512, 386])` indicates the data is in (Z, Y, X) order, while the submission should be (X, Y, Z). This can be resolved by transposing the final segmentation before saving.
-- When setting the number of epochs, ensure that the nnUNet environment variable `nnUNet_n_epochs` is correctly set or modify the trainer directly.
--   Monitor GPU usage during training to ensure that the GPU is being utilized effectively.
--   If training is interrupted, ensure that training is resumed from the last saved checkpoint.
--   For faster experimentation, use the `2d` configuration and/or train on a subset of the data.
--   Use mixed precision (GradScaler) to accelerate training and reduce memory usage.
--   Enable frequent checkpointing to save intermediate models.
--   Use a validation set to monitor performance and prevent overfitting.
--   Implement early stopping to halt training when performance on the validation set plateaus.
--   Consider transfer learning to accelerate training and improve performance.
--   Use a suitable batch size to balance training speed and stability.
--   Adjust data augmentation to improve generalization.
--   Consider using snapshot ensembling or test-time augmentation to improve performance.
--   When using the `nnUNetv2_predict` command, ensure that the correct parameters are used, including the dataset ID, configuration, and model folder.
--   Before starting training, consider checking if there's an early stopping mechanism.
--   If you're using a 3D model, be aware of the large memory footprint, and adjust batch size accordingly.
--   Use 3D low resolution to verify the setup before running full resolution training.
--   Always pass torch device rather than a string.
--   When running into an `OSError: [WinError 1455] The paging file is too small` error, reduce the number of workers.
--   When running into an `OSError: [WinError 1455] The paging file is too small` error, set the environment variable `nnUNet_n_proc_DA` to a low number like "2".
--   To prevent system crashes, add `$env:nnUNet_n_proc_DA = "2"` to the training script when encountering `OSError: [WinError 1455] The paging file is too small`.
--   To ensure the custom epoch count works, the training script should use the `nnUNetTrainerCustomEpochs` trainer.
--   The `nnUNet_n_epochs` variable is not correctly set. nnU-Net uses a default of 1000 epochs. To fix this, create a custom trainer or modify the plans.
-- The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
--   The PowerShell script, `monitor_training_live.ps1`, is throwing a `ParserError`. The resolution is to enclose `$epochTimestamp` within curly braces, replacing `$epochTimestamp` with `${epochTimestamp}`.
--   If you encounter `OSError: [WinError 1455] The paging file is too small` error, this indicates a memory issue.
--   If you encounter the error "fatal: Unable to create 'C:/.../.git/index.lock': File exists", it indicates that another Git process is running. Terminate any other Git processes and try again. If the error persists, manually remove the `index.lock` file.
--   If `git add .` hangs, it may be due to a large number of files or large files. Verify .gitignore is set up correctly, and if it still hangs, try adding smaller batches of files to identify the problematic ones.
--   If you encounter "LF will be replaced by CRLF" warnings, it indicates that Git is automatically converting line endings. This is usually safe to ignore, but you can disable it by setting `git config --global core.safecrlf false`.
--   The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
--   The Python script, `monitor_training_live.ps1`, is throwing a `ParserError`. The resolution is to enclose `$epochTimestamp` within curly braces, replacing `$epochTimestamp` with `${epochTimestamp}`.
--   To prevent system crashes, add `$env:nnUNet_n_proc_DA = "2"` to the training script when encountering `OSError: [WinError 1455] The paging file is too small`.
--   To ensure the custom epoch count works, the training script should use the `nnUNetTrainerCustomEpochs` trainer.
--   The `nnUNet_n_epochs` variable is not correctly set. nnU-Net uses a default of 1000 epochs. To fix this, create a custom trainer or modify the plans.
--   The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
--   If you encounter the error "fatal: Unable to create 'C:/.../.git/index.lock': File exists", it indicates that another Git process is running. Terminate any other Git processes and try again. If the error persists, manually remove the `index.lock` file.
--   If `git add .` hangs, it may be due to a large number of files or large files. Verify .gitignore is set up correctly, and if it still hangs, try adding smaller batches of files to identify the problematic ones.
--   If you encounter "LF will be replaced by CRLF" warnings, it indicates that Git is automatically converting line endings. This is usually safe to ignore, but you can disable it by setting `git config --global core.safecrlf false`.
--   The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
--   Interacting with the terminal may inadvertently interrupt the training process.
 -   If there is a "file in use" error when attempting to remove files, Visual Studio Code, especially its integrated Git extension, may be holding a lock on the file. Close additional terminal windows and any other applications that might have a file handle open.
 -   When encountering the error "Git: fatal: Unable to create ;C:/CardiacSegt/.get/inex.lock': File exists", it indicates a Git lock file issue. The resolution is to remove the lock file.
 -   If there is a `list index out of range` error, check for files without channel IDs in the `imagesTs` folder
@@ -218,7 +173,7 @@ This document defines the rules, coding standards, workflow guidelines, referenc
 -   If `git add .` hangs, it may be due to a large number of files or large files. Verify .gitignore is set up correctly, and if it still hangs, try adding smaller batches of files to identify the problematic ones.
 -   If you encounter "LF will be replaced by CRLF" warnings, it indicates that Git is automatically converting line endings. This is usually safe to ignore, but you can disable it by setting `git config --global core.safecrlf false`.
 -   The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
--   Interacting with the terminal may inadvertently interrupt the training process.
+- Interacting with the terminal may inadvertently interrupt the training process.
 -   If there is a "file in use" error when attempting to remove files, Visual Studio Code, especially its integrated Git extension, may be holding a lock on the file. Close additional terminal windows and any other applications that might have a file handle open.
 -   When encountering the error "Git: fatal: Unable to create ;C:/CardiacSegt/.get/inex.lock': File exists", it indicates a Git lock file issue. The resolution is to remove the lock file.
 -   If there is a `list index out of range` error, check for files without channel IDs in the `imagesTs` folder
@@ -253,4 +208,48 @@ This document defines the rules, coding standards, workflow guidelines, referenc
 -   If you encounter the error "fatal: Unable to create 'C:/.../.git/index.lock': File exists", it indicates that another Git process is running. Terminate any other Git processes and try again. If the error persists, manually remove the `index.lock` file.
 -   If `git add .` hangs, it may be due to a large number of files or large files. Verify .gitignore is set up correctly, and if it still hangs, try adding smaller batches of files to identify the problematic ones.
 -   If you encounter "LF will be replaced by CRLF" warnings, it indicates that Git is automatically converting line endings. This is usually safe to ignore, but you can disable it by setting `git config --global core.safecrlf false`.
--
+-   The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
+-   The Python script, `monitor_training_live.ps1`, is throwing a `ParserError`. The resolution is to enclose `$epochTimestamp` within curly braces, replacing `$epochTimestamp` with `${epochTimestamp}`.
+-   To prevent system crashes, add `$env:nnUNet_n_proc_DA = "2"` to the training script when encountering `OSError: [WinError 1455] The paging file is too small`.
+-   To ensure the custom epoch count works, the training script should use the `nnUNetTrainerCustomEpochs` trainer.
+-   The `nnUNet_n_epochs` variable is not correctly set. nnU-Net uses a default of 1000 epochs. To fix this, create a custom trainer or modify the plans.
+-   The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
+-   If you encounter the error "fatal: Unable to create 'C:/.../.git/index.lock': File exists", it indicates that another Git process is running. Terminate any other Git processes and try again. If the error persists, manually remove the `index.lock` file.
+-   If `git add .` hangs, it may be due to a large number of files or large files. Verify .gitignore is set up correctly, and if it still hangs, try adding smaller batches of files to identify the problematic ones.
+-   If you encounter "LF will be replaced by CRLF" warnings, it indicates that Git is automatically converting line endings. This is usually safe to ignore, but you can disable it by setting `git config --global core.safecrlf false`.
+-   The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
+- Interacting with the terminal may inadvertently interrupt the training process.
+-   If there is a "file in use" error when attempting to remove files, Visual Studio Code, especially its integrated Git extension, may be holding a lock on the file. Close additional terminal windows and any other applications that might have a file handle open.
+-   When encountering the error "Git: fatal: Unable to create ;C:/CardiacSegt/.get/inex.lock': File exists", it indicates a Git lock file issue. The resolution is to remove the lock file.
+-   If there is a `list index out of range` error, check for files without channel IDs in the `imagesTs` folder
+-   The `Submission data validation is fail` error is often caused by dimension mismatch.
+-   If a submission fails with `Submission data validation is fail. In your submission, the image size (386, 512, 512) is different from the ground truth torch.Size([512, 512, 386])`, it indicates a dimension mismatch, and that the final segmentation must be transposed before saving.
+-   `Submission data validation is fail. In your submission, the image size (386, 512, 512) is different from the ground truth torch.Size([512, 512, 386])` indicates the data is in (Z, Y, X) order, while the submission should be (X, Y, Z). This can be resolved by transposing the final segmentation before saving.
+-   When setting the number of epochs, ensure that the nnUNet environment variable `nnUNet_n_epochs` is correctly set or modify the trainer directly.
+-   Monitor GPU usage during training to ensure that the GPU is being utilized effectively.
+-   If training is interrupted, ensure that training is resumed from the last saved checkpoint.
+-   For faster experimentation, use the `2d` configuration and/or train on a subset of the data.
+-   Use mixed precision (GradScaler) to accelerate training and reduce memory usage.
+-   Enable frequent checkpointing to save intermediate models.
+-   Use a validation set to monitor performance and prevent overfitting.
+-   Implement early stopping to halt training when performance on the validation set plateaus.
+-   Consider transfer learning to accelerate training and improve performance.
+-   Use a suitable batch size to balance training speed and stability.
+-   Adjust data augmentation to improve generalization.
+-   Consider using snapshot ensembling or test-time augmentation to improve performance.
+-   When using the `nnUNetv2_predict` command, ensure that the correct parameters are used, including the dataset ID, configuration, and model folder.
+-   Before starting training, consider checking if there's an early stopping mechanism.
+-   If you're using a 3D model, be aware of the large memory footprint, and adjust batch size accordingly.
+-   Use 3D low resolution to verify the setup before running full resolution training.
+-   Always pass torch device rather than a string.
+-   When running into an `OSError: [WinError 1455] The paging file is too small` error, reduce the number of workers.
+-   When running into an `OSError: [WinError 1455] The paging file is too small` error, set the environment variable `nnUNet_n_proc_DA` to a low number like "2".
+-   To prevent system crashes, add `$env:nnUNet_n_proc_DA = "2"` to the training script when encountering `OSError: [WinError 1455] The paging file is too small`.
+-   To ensure the custom epoch count works, the training script should use the `nnUNetTrainerCustomEpochs` trainer.
+-   The `nnUNet_n_epochs` variable is not correctly set. nnU-Net uses a default of 1000 epochs. To fix this, create a custom trainer or modify the plans.
+- The `train_remaining_3d_lowres.ps1` script should use the `--c` (continue) parameter to resume training from the last valid checkpoint.
+-   The PowerShell script, `monitor_training_live.ps1`, is throwing a `ParserError`. The resolution is to enclose `$epochTimestamp` within curly braces, replacing `$epochTimestamp` with `${epochTimestamp}`.
+-   If you encounter `OSError: [WinError 1455] The paging file is too small` error, this indicates a memory issue.
+-   If you encounter the error "fatal: Unable to create 'C:/.../.git/index.lock': File exists", it indicates that another Git process is running. Terminate any other Git processes and try again. If the error persists, manually remove the `index.lock` file.
+-   If `git add .` hangs, it may be due to a large number of files or large files. Verify .gitignore is set up correctly, and if it still hangs, try adding smaller batches of files to identify the problematic ones.
+-   If you encounter "LF will be replaced by CRLF" warnings, it indicates that Git is automatically converting line endings. This is usually safe to ignore
